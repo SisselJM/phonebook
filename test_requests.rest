@@ -12,3 +12,13 @@ GET http://localhost:3001/api/persons/145
 
 ### delete
 DELETE http://localhost:3001/api/persons/2
+
+### create
+
+POST http://localhost:3001/api/persons/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Lars Hansen", 
+    "number": "12345678"
+}
