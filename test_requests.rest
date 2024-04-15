@@ -22,3 +22,12 @@ content-type: application/json
     "name": "Lars Hansen", 
     "number": "12345678"
 }
+
+### create without number
+
+POST http://localhost:3001/api/persons/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "No number"
+}
