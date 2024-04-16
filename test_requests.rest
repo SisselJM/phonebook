@@ -4,6 +4,9 @@ GET http://localhost:3001/api/persons
 ### info
 GET http://localhost:3001/info
 
+### info from fly
+GET https://phonebook-sjm.fly.dev/info
+
 ### get 1 person
 GET http://localhost:3001/api/persons/1
 
