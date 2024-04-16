@@ -1,6 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
+const cors = require('cors')
 
 //also show the data sent in HTTP POST requests
 morgan.token('req-body', (req) => {
@@ -11,6 +12,8 @@ morgan.token('req-body', (req) => {
   });
 
 app.use(morgan(':method :url :status :response-time ms - :req-body'))
+
+app.use(cors())
 
 app.use(express.json())
 
