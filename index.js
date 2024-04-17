@@ -2,24 +2,7 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 const cors = require('cors')
-const mongoose = require('mongoose')
-
-const password = process.argv[2]
-
-const url = `mongodb+srv://sisselmannsaker:${password}@cluster0.qw9f45v.mongodb.net/phonebook?retryWrites=true&w=majority`
-
-mongoose.set('strictQuery',false)
-
-mongoose.connect(url)
-
-const personSchema = new mongoose.Schema({
-    id: Number,
-    name: String, 
-    number: String
-})
-
-
-const Person = mongoose.model('Person', personSchema)
+const Person = require('./models/person')
 
 //also show the data sent in HTTP POST requests
 morgan.token('req-body', (req) => {
