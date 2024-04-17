@@ -13,6 +13,9 @@ GET http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e2
 ### non-existing id, returns 404
 GET http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e3
 
+### get with wrong id format - CastError returns 400 Bad Request
+GET http://localhost:3001/api/persons/135
+
 ### delete
 DELETE http://localhost:3001/api/persons/661fa9e184250a8ae639bc12
 
