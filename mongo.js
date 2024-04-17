@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 
-//test run: node mongo.js psw
+//getAll: node mongo.js psw 
+//add: node mongo.js psw name number
 
 if (process.argv.length<3) {
   console.log('give password as argument')
@@ -23,14 +24,35 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', personSchema)
 
+if (process.argv.length === 3) {
+    Person.find({}).then(result => {
+        //console.log(result)
+        result.map((p) => {
+            console.log(`${p.name} ${p.number}`)
+        })
+        mongoose.connection.close()
+      })
+
+    return
+}
+
+if (process.argv.length<5) {
+    console.log('give name and number')
+    process.exit(1)
+}
+const name = process.argv[3]
+const number = process.argv[4]
+const id = Math.floor(Math.random() * 10000)
+console.log(`${name} ${number} ${id}`)
+
 const person = new Person({
-    "id": 4,
-    "name": "Mongo Db", 
-    "number": "123-123456",
+    "id": id,
+    "name": name, 
+    "number": number,
 })
 
 person.save().then(result => {
-  console.log('person saved!')
-  console.log(result)
+  console.log(`Added ${name} number ${number} to phonebook`)
+  //console.log(result)
   mongoose.connection.close()
 })
