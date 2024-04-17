@@ -45,15 +45,19 @@ app.get('/api/persons/:id', (request, response) => {
         response.json(p)
     })
 })
-  
-app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    //console.log(persons.length)
-    persons = persons.filter(p => p.id !== id)
-    //console.log(persons.length)
-    response.status(204).end()
-})
 
+app.delete('/api/persons/:id', (request, response, next) => {
+    Person.findByIdAndDelete(request.params.id)
+      .then(result => {
+        response.status(204).end()
+      })
+      .catch(error => {
+        console.log(error)
+        response.status(500).end()
+      })
+      //.catch(error => next(error))
+  })
+  
 const generateId = () => {
     const id = Math.floor(Math.random() * 10000)
     console.log(id)
