@@ -103,7 +103,7 @@ const errorHandler = (error, request, response, next) => {
       return response.status(400).send({ error: 'malformatted id' })
     } 
   
-    next(error)
+    next(error) // 500 Internal Server Error
 }
   
 // this has to be the last loaded middleware, also all the routes should be registered before this!
