@@ -7,11 +7,11 @@ GET http://localhost:3001/info
 ### info from fly
 GET https://phonebook-sjm.fly.dev/info
 
-### get 1 person
-GET http://localhost:3001/api/persons/1
+### get 1 person from mongoDB
+GET http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e2
 
 ### non-existing id
-GET http://localhost:3001/api/persons/145
+GET http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e3
 
 ### delete
 DELETE http://localhost:3001/api/persons/2

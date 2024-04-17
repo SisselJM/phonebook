@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
@@ -20,26 +21,6 @@ app.use(express.json())
 app.use(express.static('dist'))
 
 let persons = [
-    { 
-        "id": 1,
-        "name": "Arto Hellas", 
-        "number": "040-123456"
-    },
-    { 
-        "id": 2,
-        "name": "Ada Lovelace", 
-        "number": "39-44-5323523"
-    },
-    { 
-        "id": 3,
-        "name": "Dan Abramov", 
-        "number": "12-43-234345"
-    },
-    { 
-        "id": 4,
-        "name": "Mary Poppendieck", 
-        "number": "39-23-6423122"
-    }
 ]
 
 app.get('/info', (request, response) => {
@@ -56,13 +37,10 @@ app.get('/api/persons', (request, response) => {
 })
 
 app.get('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    const person = persons.find(p => p.id === id)
-    if (person) {
-        response.json(person)
-    } else {
-        response.status(404).end()
-    }
+    Person.findById(request.params.id)
+    .then(p => {
+        response.json(p)
+    })
 })
   
 app.delete('/api/persons/:id', (request, response) => {
@@ -88,26 +66,29 @@ app.post('/api/persons', (request, response) => {
             error: 'name and/or number missing'
         })
     }
+    /*
     const existing = persons.find(p => p.name === body.name)
     if (existing) {
         response.status(400).json({
             error: 'name must be unique'
         })
-    }
+    }*/
 
-    const person = {
+    const person = new Person({
         name: body.name,
         number: body.number,
-        id: generateId()
-    }
-
-    persons = persons.concat(person)
+        id: generateId(),
+    })
+    
+    person.save().then(savedPerson => {
+        response.json(savedPerson)
+    })
 
     //console.log(person)
     response.json(person)
 })
   
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })

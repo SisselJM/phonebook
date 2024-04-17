@@ -2,11 +2,9 @@ const mongoose = require('mongoose')
 
 mongoose.set('strictQuery',false)
 
-//TODO process.env.MONGODB_URI
-const password = process.argv[2]
-const url = `mongodb+srv://sisselmannsaker:${password}@cluster0.qw9f45v.mongodb.net/phonebook?retryWrites=true&w=majority`
+const url = process.env.MONGODB_URI
 
-console.log('connecting to', url)
+//console.log('connecting to', url) //don't show psw in prod!
 
 mongoose.connect(url)
   .then(result => {
