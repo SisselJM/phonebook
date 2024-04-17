@@ -26,8 +26,11 @@ let persons = [
 app.get('/info', (request, response) => {
     const date = Date()
     //console.log(date)
-    const msg = `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`
-    response.send(msg)
+    Person.find({}).then(persons => {
+        console.log(persons.length)
+        const msg = `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`
+        response.send(msg)
+    })
 })
   
 app.get('/api/persons', (request, response) => {

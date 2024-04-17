@@ -12,6 +12,17 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\index.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Dev",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/node_modules/nodemon/bin/nodemon.js",
+            "args": ["--inspect", "${workspaceFolder}/index.js"],
+            "runtimeExecutable": null
         }
     ]
 }
