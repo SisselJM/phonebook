@@ -23,7 +23,6 @@ DELETE http://localhost:3001/api/persons/661fa9e184250a8ae639bc12
 DELETE http://localhost:3001/api/persons/661
 
 ### create
-
 POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
@@ -33,7 +32,6 @@ content-type: application/json
 }
 
 ### create without number
-
 POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
@@ -41,8 +39,16 @@ content-type: application/json
     "name": "No number"
 }
 
-### update
+### create with too short name. Should return 400, Person validation failed...
+POST http://localhost:3001/api/persons/ HTTP/1.1
+content-type: application/json
 
+{
+    "name": "Ny", 
+    "number": "44444444"
+}
+
+### update
 PUT http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e2 HTTP/1.1
 content-type: application/json
 

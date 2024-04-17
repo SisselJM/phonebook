@@ -56,15 +56,10 @@ app.delete('/api/persons/:id', (request, response, next) => {
       .catch(error => next(error))
   })
   
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const body = request.body
     //console.log(body) 
     
-    if (!body.name || !body.number) {
-        return response.status(400).json({
-            error: 'name and/or number missing'
-        })
-    }
     /*
     const existing = persons.find(p => p.name === body.name)
     if (existing) {
@@ -78,27 +73,21 @@ app.post('/api/persons', (request, response) => {
         number: body.number,
     })
     
-    person.save().then(savedPerson => {
+    person.save()
+    .then(savedPerson => {
         response.json(savedPerson)
     })
-
-    //console.log(person)
-    response.json(person)
+    .catch(error => next(error))
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
     //console.log(request)
     const body = request.body
-    if (!body.name || !body.number) {
-        return response.status(400).json({
-            error: 'name and/or number missing'
-        })
-    }
     const person = {
         name: body.name,
         number: body.number,
     }
-    Person.findByIdAndUpdate(request.params.id, person, { new: true })
+    Person.findByIdAndUpdate(request.params.id, person, { new: true, runValidators: true, context: 'query' })
       .then(updated => {
         response.json(updated)
       })
@@ -110,6 +99,8 @@ const errorHandler = (error, request, response, next) => {
   
     if (error.name === 'CastError') {
       return response.status(400).send({ error: 'malformatted id' })
+    } else if (error.name === 'ValidationError') {
+      return response.status(400).json({ error: error.message })
     } 
   
     next(error) // 500 Internal Server Error
