@@ -40,3 +40,14 @@ content-type: application/json
 {
     "name": "No number"
 }
+
+### update
+
+PUT http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sissel", 
+    "number": "66666"
+}
+
