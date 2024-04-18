@@ -45,7 +45,7 @@ content-type: application/json
 
 {
     "name": "Ny", 
-    "number": "44444444"
+    "number": "040-22334455"
 }
 
 ### create with invalid number. Returns 400, Person validation failed: number: 12345678 is not a valid phone number!
@@ -63,6 +63,16 @@ content-type: application/json
 
 {
     "name": "Sissel", 
-    "number": "66666"
+    "number": "040-22334455"
 }
+
+### update with invalid number
+PUT http://localhost:3001/api/persons/661f7c1ffeb4a2579a4686e2 HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sissel", 
+    "number": "6666633333"
+}
+
 
