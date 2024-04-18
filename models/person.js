@@ -7,7 +7,7 @@ const url = process.env.MONGODB_URI
 //console.log('connecting to', url) //don't show psw in prod!
 
 mongoose.connect(url)
-  .then(result => {
+  .then(() => {
     console.log('connected to MongoDB')
   })
   .catch(error => {
