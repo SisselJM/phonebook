@@ -33,7 +33,7 @@ if (process.argv.length === 3) {
         mongoose.connection.close()
       })
 
-    return
+      process.exit(0)
 }
 
 if (process.argv.length<5) {
