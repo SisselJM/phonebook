@@ -3,7 +3,13 @@ import pluginJs from '@eslint/js'
 import stylistic from '@stylistic/eslint-plugin-js'
 
 export default [
-  { files: ['**/*.js'], languageOptions: { sourceType: 'commonjs' } },
+  {
+    files: ['**/*.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+      globals: { 'process': true },
+    }
+  },
   { ignores: ['dist'] },
   { languageOptions: { globals: globals.browser } },
   { plugins: {
@@ -24,7 +30,7 @@ export default [
       'arrow-spacing': [
         'error', { 'before': true, 'after': true }
       ],
-      'no-console': 0
+      'no-console': 0 //ignore
     }
   }
 ]
