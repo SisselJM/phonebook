@@ -22,13 +22,13 @@ DELETE http://localhost:3001/api/persons/661fa9e184250a8ae639bc12
 ### delete with wrong id format - CastError returns 400 Bad Request
 DELETE http://localhost:3001/api/persons/661
 
-### create
+### create. 200 Ok
 POST http://localhost:3001/api/persons/ HTTP/1.1
 content-type: application/json
 
 {
     "name": "Lars Hansen", 
-    "number": "12345678"
+    "number": "09-1234556"
 }
 
 ### create without number
@@ -46,6 +46,15 @@ content-type: application/json
 {
     "name": "Ny", 
     "number": "44444444"
+}
+
+### create with invalid number. Returns 400, Person validation failed: number: 12345678 is not a valid phone number!
+POST http://localhost:3001/api/persons/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Invalid number",
+    "number": "1234-5678"
 }
 
 ### update
